@@ -17,7 +17,11 @@ Don't forget to enable I2C communication:
 ~/8relay-rpi$ sudo make install
 ```
 
-Now you can access all the functions of the relays board through the command "8relay"
+Now you can access all the functions of the relays board through the command "8relay". Use -h option for help:
+```bash
+~$ 8relay -h
+```
+
 If you clone the repository any update can be made with the following commands:
 
 ```bash
