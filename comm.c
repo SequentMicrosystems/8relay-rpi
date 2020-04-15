@@ -2,7 +2,7 @@
  * comm.c:
  *	Communication routines "platform specific" for Raspberry Pi
  *	
- *	Copyright (c) 2016-2018 Sequent Microsystem
+ *	Copyright (c) 2016-2020 Sequent Microsystem
  *	<http://www.sequentmicrosystem.com>
  ***********************************************************************
  *	Author: Alexandru Burcea
