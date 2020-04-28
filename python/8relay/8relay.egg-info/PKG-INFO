@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: 8relay
+Version: 1.0.0
+Summary: A set of functions to control Sequent Microsystems 8-Relay board
+Home-page: https://www.sequentmicrosystems.com
+Author: Sequent Microsystems
+Author-email: olcitu@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2/3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
