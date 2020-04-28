@@ -1,6 +1,0 @@
-setup.py
-8relay/__init__.py
-8relay.egg-info/PKG-INFO
-8relay.egg-info/SOURCES.txt
-8relay.egg-info/dependency_links.txt
-8relay.egg-info/top_level.txt
