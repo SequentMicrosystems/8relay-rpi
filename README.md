@@ -2,7 +2,8 @@
 
 # 8relay-rpi
 
-This is the command to control [8-Relay Stackable Card for Raspberry Pi](https://sequentmicrosystems.com/index.php?route=product/product&path=33&product_id=50)
+This is the command line and python functions to control the Sequent Microsystems 8 Relay Card for Raspberry PI Ver. 3. If you have Ver. 1-2 with screw-type connectors download from   
+https://github.com/SequentMicrosystems/relay8-rpi
 
 Don't forget to enable I2C communication:
 ```bash
