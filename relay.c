@@ -292,7 +292,7 @@ int doBoardInit(int stack)
 	}
 	if (ERROR == i2cMem8Read(dev, RELAY8_CFG_REG_ADD, buff, 1))
 	{
-		printf("Relay8 id %d not detected\n", stack);
+		printf("8relay board id %d not detected\n", stack);
 		return ERROR;
 	}
 	if (buff[0] != 0) //non initialized I/O Expander
