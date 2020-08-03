@@ -14,6 +14,10 @@ This is the python library to control the [8relay](https://sequentmicrosystems.c
 ~$ cd 8relay-rpi/python/8relay/
 ~/8relay-rpi/python/8relay$ sudo python setup.py install
 ```
+For python3.x the last line must be replaced with:
+```bash
+~/8relay-rpi/python/8relay$ sudo python3 setup.py install
+```
 ## Update
 
 ```bash
@@ -22,7 +26,10 @@ This is the python library to control the [8relay](https://sequentmicrosystems.c
 ~$ cd 8relay-rpi/python/8relay/
 ~/8relay-rpi/python/8relay$ sudo python setup.py install
 ```
-
+For python3.x the last line must be replaced with:
+```bash
+~/8relay-rpi/python/8relay$ sudo python3 setup.py install
+```
 ## Usage 
 
 Now you can import the megaio library and use its functions. To test, read relays status from the board with stack level 0:
