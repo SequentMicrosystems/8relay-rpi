@@ -32,7 +32,7 @@ For python3.x the last line must be replaced with:
 ```
 ## Usage 
 
-Now you can import the megaio library and use its functions. To test, read relays status from the board with stack level 0:
+Now you can import the lib8relay library and use its functions. To test, read relays status from the board with stack level 0:
 
 ```bash
 ~$ python
