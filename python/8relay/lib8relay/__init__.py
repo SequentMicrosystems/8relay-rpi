@@ -39,15 +39,12 @@ def set(stack, relay, value):
 	bus = smbus.SMBus(1)
 	if stack < 0 or stack > 7:
 		raise ValueError('Invalid stack level')
-		return
   
 	stack = 0x07 ^ stack;
 	if relay < 1:
 		raise ValueError('Invalid relay number')
-		return
 	if relay > 8:
 		raise ValueError('Invalid relay number')
-		return
 	oldVal = check(bus, DEVICE_ADDRESS + stack)
 	oldVal = IOToRelay(oldVal)
 	if value == 0:
@@ -58,23 +55,22 @@ def set(stack, relay, value):
 		oldVal = oldVal | (1 << (relay - 1))
 		oldVal = relayToIO(oldVal)
 		bus.write_byte_data(DEVICE_ADDRESS + stack, RELAY8_OUTPORT_REG_ADD, oldVal)
+	bus.close()
 
 		
 def set_all(stack, value):
 	bus = smbus.SMBus(1)
 	if stack < 0 or stack > 7:
 		raise ValueError('Invalid stack level')
-		return
 	stack = 0x07 ^ stack  
 	if value > 255 :
 		raise ValueError('Invalid relay value')
-		return
 	if value < 0:
 		raise ValueError('Invalid relay value')
-		return
 	oldVal = check(bus, DEVICE_ADDRESS + stack)	
 	value = relayToIO(value)
 	bus.write_byte_data(DEVICE_ADDRESS + stack, RELAY8_OUTPORT_REG_ADD, value)
+	bus.close()
 
 
 	
@@ -82,17 +78,15 @@ def get(stack, relay):
 	bus = smbus.SMBus(1)
 	if stack < 0 or stack > 7:
 		raise ValueError('Invalid stack level')
-		return
 	stack = 0x07 ^ stack  
 	if relay < 1:
 		raise ValueError('Invalid relay number')
-		return
 	if relay > 8:
 		raise ValueError('Invalid relay number')
-		return
 	val = check(bus, DEVICE_ADDRESS + stack)
 	val = IOToRelay(val) 
 	val = val & (1 << (relay - 1))
+	bus.close()
 	if val == 0:
 		return 0
 	else:
@@ -104,8 +98,8 @@ def get_all(stack):
 	bus = smbus.SMBus(1)
 	if stack < 0 or stack > 7:
 		raise ValueError('Invalid stack level')
-		return
 	stack = 0x07 ^ stack
 	val = check(bus, DEVICE_ADDRESS + stack)
 	val = IOToRelay(val) 
+	bus.close()
 	return val
