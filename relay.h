@@ -17,6 +17,7 @@
 #define FAIL	-1
 
 #define RELAY8_HW_I2C_BASE_ADD	0x38
+#define RELAY8_HW_I2C_ALTERNATE_BASE_ADD 0x20
 typedef uint8_t u8;
 typedef uint16_t u16;
 

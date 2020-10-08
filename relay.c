@@ -1,5 +1,5 @@
 /*
- * relay8.c:
+ * relay.c:
  *	Command-line interface to the Raspberry
  *	Pi's 8-Relay board.
  *	Copyright (c) 2016-2020 Sequent Microsystem
@@ -18,7 +18,7 @@
 #include "thread.h"
 
 #define VERSION_BASE	(int)1
-#define VERSION_MAJOR	(int)0
+#define VERSION_MAJOR	(int)1
 #define VERSION_MINOR	(int)0
 
 #define UNUSED(X) (void)X      /* To avoid gcc/g++ warnings */
@@ -45,8 +45,6 @@ const int relayChRemap[8] =
 	5,
 	7};
 
-
-
 int relayChSet(int dev, u8 channel, OutStateEnumType state);
 int relayChGet(int dev, u8 channel, OutStateEnumType* state);
 u8 relayToIO(u8 relay);
@@ -54,14 +52,14 @@ u8 IOToRelay(u8 io);
 
 static void doHelp(int argc, char *argv[]);
 const CliCmdType CMD_HELP =
-{
-	"-h",
-	1,
-	&doHelp,
-	"\t-h          Display the list of command options or one command option details\n",
-	"\tUsage:      8relay -h    Display command options list\n",
-	"\tUsage:      8relay -h <param>   Display help for <param> command option\n",
-	"\tExample:    8relay -h write    Display help for \"write\" command option\n"};
+	{
+		"-h",
+		1,
+		&doHelp,
+		"\t-h          Display the list of command options or one command option details\n",
+		"\tUsage:      8relay -h    Display command options list\n",
+		"\tUsage:      8relay -h <param>   Display help for <param> command option\n",
+		"\tExample:    8relay -h write    Display help for \"write\" command option\n"};
 
 static void doVersion(int argc, char *argv[]);
 const CliCmdType CMD_VERSION =
@@ -87,14 +85,14 @@ const CliCmdType CMD_WAR =
 
 static void doList(int argc, char *argv[]);
 const CliCmdType CMD_LIST =
-{
-	"-list",
-	1,
-	&doList,
-	"\t-list:       List all 8relay boards connected,\n\treturn       nr of boards and stack level for every board\n",
-	"\tUsage:       8relay -list\n",
-	"",
-	"\tExample:     8relay -list display: 1,0 \n"};
+	{
+		"-list",
+		1,
+		&doList,
+		"\t-list:       List all 8relay boards connected,\n\treturn       nr of boards and stack level for every board\n",
+		"\tUsage:       8relay -list\n",
+		"",
+		"\tExample:     8relay -list display: 1,0 \n"};
 
 static void doRelayWrite(int argc, char *argv[]);
 const CliCmdType CMD_WRITE =
@@ -279,21 +277,31 @@ int doBoardInit(int stack)
 	int add = 0;
 	uint8_t buff[8];
 
-	if((stack < 0) || (stack > 7))
+	if ( (stack < 0) || (stack > 7))
 	{
 		printf("Invalid stack level [0..7]!");
 		return ERROR;
 	}
-	add = (stack  + RELAY8_HW_I2C_BASE_ADD) ^ 0x07;
+	add = (stack + RELAY8_HW_I2C_BASE_ADD) ^ 0x07;
 	dev = i2cSetup(add);
 	if (dev == -1)
 	{
 		return ERROR;
+
 	}
 	if (ERROR == i2cMem8Read(dev, RELAY8_CFG_REG_ADD, buff, 1))
 	{
-		printf("8relay board id %d not detected\n", stack);
-		return ERROR;
+		add = (stack + RELAY8_HW_I2C_ALTERNATE_BASE_ADD) ^ 0x07;
+		dev = i2cSetup(add);
+		if (dev == -1)
+		{
+			return ERROR;
+		}
+		if (ERROR == i2cMem8Read(dev, RELAY8_CFG_REG_ADD, buff, 1))
+		{
+			printf("8relay board id %d not detected\n", stack);
+			return ERROR;
+		}
 	}
 	if (buff[0] != 0) //non initialized I/O Expander
 	{
@@ -509,7 +517,7 @@ static void doHelp(int argc, char *argv[])
 	{
 		for (i = 0; i < CMD_ARRAY_SIZE; i++)
 		{
-			if ( (gCmdArray[i].name != NULL ))
+			if ( (gCmdArray[i].name != NULL))
 			{
 				if (strcasecmp(argv[2], gCmdArray[i].name) == 0)
 				{
@@ -557,6 +565,14 @@ static void doList(int argc, char *argv[])
 		{
 			ids[cnt] = i;
 			cnt++;
+		}
+		else
+		{
+			if (boardCheck(RELAY8_HW_I2C_ALTERNATE_BASE_ADD + i) == OK)
+			{
+				ids[cnt] = i;
+				cnt++;
+			}
 		}
 	}
 	printf("%d board(s) detected\n", cnt);
@@ -753,7 +769,7 @@ int main(int argc, char *argv[])
 	}
 	for (i = 0; i < CMD_ARRAY_SIZE; i++)
 	{
-		if ( (gCmdArray[i].name != NULL ) && (gCmdArray[i].namePos < argc))
+		if ( (gCmdArray[i].name != NULL) && (gCmdArray[i].namePos < argc))
 		{
 			if (strcasecmp(argv[gCmdArray[i].namePos], gCmdArray[i].name) == 0)
 			{
