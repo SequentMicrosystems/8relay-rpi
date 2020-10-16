@@ -2,8 +2,7 @@
 
 # 8relay-rpi
 
-This is the command line and python functions to control the Sequent Microsystems 8 Relay Card for Raspberry PI Ver. 3. If you have Ver. 1-2 with screw-type connectors download from   
-https://github.com/SequentMicrosystems/relay8-rpi
+This is the command line and python functions to control the Sequent Microsystems 8 Relay Card for Raspberry PI Ver. 3. If you have Ver. 1-2 with screw-type connectors download from [here](https://github.com/SequentMicrosystems/relay8-rpi).
 
 Don't forget to enable I2C communication:
 ```bash
@@ -30,3 +29,9 @@ If you clone the repository any update can be made with the following commands:
 ~/8relay-rpi$ git pull
 ~/8relay-rpi$ sudo make install
 ```  
+
+Python library can be found [here](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/python).
+
+Node-Red example based on "exec" node [here](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/node-red)
+
+Node-Red "8relay" node under construction.
