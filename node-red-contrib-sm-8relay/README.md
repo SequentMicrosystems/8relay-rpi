@@ -2,8 +2,6 @@
 
 This is the node-red node to control Sequent Microsystems [8-RELAY](https://sequentmicrosystems.com/index.php?route=product/product&path=33&product_id=50) card.
 
-This node control one relay.
-
 ## Install
 
 Clone or update the repository, follow the instrutions fron the [first page.](https://github.com/SequentMicrosystems/8relay-rpi)
