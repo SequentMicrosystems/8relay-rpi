@@ -34,4 +34,4 @@ Python library can be found [here](https://github.com/SequentMicrosystems/8relay
 
 Node-Red example based on "exec" node [here](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/node-red)
 
-Node-Red "8relay" node under construction.
+Node-Red "8relay" node [here](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/node-red-contrib-sm-8relay).
