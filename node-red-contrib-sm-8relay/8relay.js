@@ -26,14 +26,14 @@ module.exports = function(RED) {
         node.port = I2C.openSync( 1 );
         node.on("input", function(msg) {
             var myPayload;
-            var stack = node.stack; 
-            if (isNaN(stack)) stack = msg.stack;
-            var relay = node.relay;
-            if (isNaN(relay)) relay = msg.relay;
+            var stack = node.stack;//|| msg.stack; 
+           
+            var relay = node.relay || msg.relay;
+            //if (isNaN(relay)) relay = msg.relay;
             stack = parseInt(stack);
             relay = parseInt(relay);
             //var buffcount = parseInt(node.count);
-            if (isNaN(stack)) {
+            if (isNaN(stack + 1)) {
                 this.status({fill:"red",shape:"ring",text:"Stack level ("+stack+") value is missing or incorrect"});
                 return;
             } else if (isNaN(relay) ) {
