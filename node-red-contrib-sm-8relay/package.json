@@ -20,11 +20,12 @@
   },
    "repository": {
     "type": "git",
-    "url": "https://github.com/SequentMicrosystems/rtd-rpi/tree/master/node-red"
+    "url": "https://github.com/SequentMicrosystems/8relay-rpi/tree/master/node-red-contrib-sm-8relay"
   },
   "keywords": [
     "node-red",
     "node-red-contrib",
-    "i2c"
+    "i2c",
+    "relay"
   ]
 }
