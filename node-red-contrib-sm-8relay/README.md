@@ -21,7 +21,7 @@ Run the fallowing command:
 ## Usage
 
 After install and restart the node-red you will see on the node palete, under Sequent Microsystems category the "8relay" node.This node will turn on or off a relay. 
-The card stack level and relay number can be set in the dialog screen. The output of the relay can be set dynamically as a boolean using msg.payload.
+The card stack level and relay number can be set in the dialog screen or dinamicaly thru ```bash msg.stack``` and ```bash msg.relay ```. The output of the relay can be set dynamically as a boolean using msg.payload.
 
 ## Important note
 
