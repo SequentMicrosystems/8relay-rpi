@@ -18,6 +18,12 @@ Run the fallowing command:
 ~/.node-red$ npm install ~/8relay-rpi/node-red-contrib-sm-8relay
 ```
 
+In order to see the node in the palette and use-it you need to restart node-red. If you run node-red as a service:
+ ```bash
+ ~$ node-red-stop
+ ~& node-red-start
+ ```
+
 ## Usage
 
 After install and restart the node-red you will see on the node palete, under Sequent Microsystems category the "8relay" node.This node will turn on or off a relay. 
