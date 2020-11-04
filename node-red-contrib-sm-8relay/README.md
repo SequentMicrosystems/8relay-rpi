@@ -1,6 +1,6 @@
 # node-red-contrib-sm-8relay
 
-This is the node-red node to control Sequent Microsystems [8-RELAY](https://sequentmicrosystems.com/index.php?route=product/product&path=33&product_id=50) card.
+This is the node-red node to control Sequent Microsystems [8-RELAYS Stackable Card for Raspberry Pi](https://sequentmicrosystems.com/product/8-relays-stackable-card-for-raspberry-pi/).
 
 ## Install
 
