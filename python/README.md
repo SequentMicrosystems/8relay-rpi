@@ -1,9 +1,9 @@
 
-[![8relay-rpi](res/sequent.jpg)](https://sequentmicrosystems.com/index.php?route=product/product&path=33&product_id=50)
+[![8relay-rpi](res/sequent.jpg)](https://sequentmicrosystems.com)
 
 # lib8relay
 
-This is the python library to control the [8-RELAYS Stackable Card for Raspberry Pi](https://sequentmicrosystems.com/product/8-relays-stackable-card-for-raspberry-pi/).
+This is the python library to control the [8-RELAYS Stackable Card for Raspberry Pi](https://sequentmicrosystems.com/product/raspberry-pi-relays-stackable-card/).
 
 ## Install
 
