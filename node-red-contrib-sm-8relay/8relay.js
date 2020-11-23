@@ -26,11 +26,11 @@ module.exports = function(RED) {
         node.port = I2C.openSync( 1 );
         node.on("input", function(msg) {
             var myPayload;
-            var stack = node.stack;//|| msg.stack; 
-           
-            var relay = node.relay || msg.relay;
-            //if (isNaN(relay)) relay = msg.relay;
+            var stack = node.stack;
+            if (isNaN(stack)) stack = msg.stack;
             stack = parseInt(stack);
+            var relay = node.relay;
+            if (isNaN(relay)) relay = msg.relay;
             relay = parseInt(relay);
             //var buffcount = parseInt(node.count);
             if (isNaN(stack + 1)) {
