@@ -32,8 +32,10 @@ If you clone the repository any update can be made with the following commands:
 ~/8relay-rpi$ sudo make install
 ```  
 
-Python library can be found [here](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/python).
+### [Python library](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/python)
 
-Node-Red example based on "exec" node [here](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/node-red)
+### [Node-Red example based on "exec" node](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/node-red)
 
-Node-Red "8relay" node [here](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/node-red-contrib-sm-8relay).
+### [Node-Red "8relay" node](https://github.com/SequentMicrosystems/8relay-rpi/tree/master/node-red-contrib-sm-8relay)
+
+### [Arduino Library](https://github.com/SequentMicrosystems/8relay-arduino)
