@@ -115,4 +115,102 @@ module.exports = function(RED) {
     }
     RED.nodes.registerType("8relay", RelayNode);
 
+    // The relay read Node
+    function RelayReadNode(n) {
+        RED.nodes.createNode(this, n);
+        this.stack = parseInt(n.stack);
+        this.relay = parseInt(n.relay);
+        this.payload = n.payload;
+        this.payloadType = n.payloadType;
+        var node = this;
+ 
+        node.port = I2C.openSync( 1 );
+        node.on("input", function(msg) {
+            var myPayload;
+            var stack = node.stack;
+            if (isNaN(stack)) stack = msg.stack;
+            stack = parseInt(stack);
+            var relay = node.relay;
+            if (isNaN(relay)) relay = msg.relay;
+            relay = parseInt(relay);
+            //var buffcount = parseInt(node.count);
+            if (isNaN(stack + 1)) {
+                this.status({fill:"red",shape:"ring",text:"Stack level ("+stack+") value is missing or incorrect"});
+                return;
+            } else if (isNaN(relay) ) {
+                this.status({fill:"red",shape:"ring",text:"Relay number  ("+relay+") value is missing or incorrect"});
+                return;
+            } else {
+                this.status({});
+            }
+            var hwAdd = DEFAULT_HW_ADD;
+            var found = 1;
+            if(stack < 0){
+                stack = 0;
+            }
+            if(stack > 7){
+              stack = 7;
+            }
+            //check the type of io_expander
+            hwAdd += stack ^ 0x07;
+            var direction = 0xaa;
+            try{
+                direction = node.port.readByteSync(hwAdd, CFG_REG );
+            }catch(err) {
+                hwAdd = ALTERNATE_HW_ADD;
+                hwAdd += stack ^ 0x07;
+                try{
+                    direction = node.port.readByteSync(hwAdd, CFG_REG );
+                }catch(err) {
+                    found = 0;
+                    this.error(err,msg);
+                }
+            }
+            
+            if(1 == found){
+            try {
+                if (this.payloadType == null) {
+                    myPayload = this.payload;
+                } else if (this.payloadType == 'none') {
+                    myPayload = null;
+                } else {
+                    myPayload = RED.util.evaluateNodeProperty(this.payload, this.payloadType, this,msg);
+                }
+                
+                if(direction != 0x00){
+                    node.port.writeByteSync(hwAdd, OUT_REG, 0x00);
+                     
+                    node.port.writeByteSync(hwAdd, CFG_REG, 0x00);
+                }
+                var relayVal = 0;    
+                relayVal = node.port.readByteSync(hwAdd, OUT_REG);
+                if(relay < 1){
+                  relay = 1;
+                }
+                if(relay > 8){
+                  relay = 8;
+                }
+                relay-= 1;//zero based
+                if(relayVal & mask[relay])
+                {
+                  msg.payload = 1;
+                }
+                else
+                {
+                  msg.payload = 0;
+                }
+                node.send(msg);
+               
+            } catch(err) {
+                this.error(err,msg);
+            }
+          }
+        });
+
+        node.on("close", function() {
+            node.port.closeSync();
+        });
+    }
+    RED.nodes.registerType("8relayrd", RelayReadNode);
+
 }
